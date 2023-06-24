@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 
+from Immobilier.views import EditorChartView
+
 
 admin.site.site_header = "GESTION IMMOBILIER"
 admin.site.site_title = "RESERVATION IMMOBILIER"
@@ -32,6 +34,7 @@ urlpatterns = [
     path('API/', include('Api.urls')),
     path('api/v1/', include('ReservationImmo.routers')),
     path('accounts/', include('allauth.urls')),
+     path('', EditorChartView.as_view(), name='index')
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

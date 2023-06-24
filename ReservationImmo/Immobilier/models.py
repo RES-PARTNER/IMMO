@@ -1,6 +1,7 @@
 import uuid
 from django.conf import settings
 from django.db import models
+from django.utils.html import mark_safe
 
 User =settings.AUTH_USER_MODEL
 
@@ -22,6 +23,10 @@ class Medias(models.Model):
      residence =models.ForeignKey(Residences, on_delete=models.CASCADE)
      created_at = models.fields.DateTimeField(auto_now_add=True)
      updated_at = models.fields.DateTimeField(auto_now_add=True)
+
+     def image_tag(self):
+        return mark_safe('<img src="MEDIA/%s" width="100px" height="100px" />'%(self.image.url))
+     image_tag.short_description = 'Image'
 
 class Options(models.Model):
      uuid  = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
