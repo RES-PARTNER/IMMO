@@ -7,9 +7,11 @@ from django.utils.html import format_html
 @admin.register(Residences)
 class AdminResidences(admin.ModelAdmin):
 
-    list_display=('title', 'description', 'localisation', 'price')
+    fields = ['title','price','localisation','description']
+    list_display=('title','price','localisation','description')
     list_filter = ("title",'localisation','price', )
-    search_fields = ("title__startswith",'localisation__startswith','price__startswith',)
+    search_fields = ("title__startswith",'localisation__startswith','price__startswith')
+    list_per_page = 2
 
     
 class AdminMedias(admin.ModelAdmin):
@@ -31,7 +33,8 @@ class AdminApartmentOptions(admin.ModelAdmin):
     list_display=('apartment', 'option','description')
 
 class AdminReviews(admin.ModelAdmin):
-    list_display=('comments', 'rating','residence','user')
+    fields = ['residence','rating','user','comments']
+    list_display=('residence','rating','user','comments')
 
 class AdminBookings(admin.ModelAdmin):
     list_display=('startDate', 'endDate','residence','user')
